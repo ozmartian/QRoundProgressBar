@@ -2,15 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import operator
-import signal
 from enum import Enum
 
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-
-signal.signal(signal.SIGINT, signal.SIG_DFL)
-signal.signal(signal.SIGTERM, signal.SIG_DFL)
+from PyQt5.QtCore import pyqtSlot, QPointF, Qt, QRectF
+from PyQt5.QtGui import (QPalette, QConicalGradient, QGradient, QRadialGradient, QFontMetricsF, QFont, QPainter, QPen,
+                         QPainterPath, QImage, QPaintEvent)
+from PyQt5.QtWidgets import QWidget
 
 
 class QRoundProgressBar(QWidget):
