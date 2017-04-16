@@ -14,8 +14,8 @@ from ui_TestWidget import Ui_TestWidget
 class TestWidget(QWidget, Ui_TestWidget):
     def __init__(self, parent=None):
         super(TestWidget, self).__init__(parent)
-        qApp.setStyle('Fusion')
         self.setupUi(self)
+        self.Slider.setTickPosition(QSlider.NoTicks)
 
         self.RoundBar1.setFormat('%v')
         self.RoundBar1.setDecimals(0)

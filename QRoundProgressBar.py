@@ -3,7 +3,6 @@
 
 import operator
 import signal
-import sys
 from enum import Enum
 
 from PyQt5.QtCore import *
@@ -50,7 +49,15 @@ class QRoundProgressBar(QWidget):
         PERCENT = 1,
         MAX = 2
 
-    # ASSIGNMENTS ---------------------------------------------------
+    # GETTERS -------------------------------------------------------
+
+    def minimum(self):
+        return self.m_min
+
+    def maximum(self):
+        return self.m_max
+
+    # SETTERS -------------------------------------------------------
 
     def setNullPosition(self, position: float):
         if position != self.m_nullPosition:
@@ -140,7 +147,10 @@ class QRoundProgressBar(QWidget):
         self.rebuildDataBrushIfNeeded()
         self.drawBackground(p, buffer.rect())
         self.drawBase(p, baseRect)
-        delta = (self.m_max - self.m_min) / (self.m_value - self.m_min)
+        if self.m_value > 0:
+            delta = (self.m_max - self.m_min) / (self.m_value - self.m_min)
+        else:
+            delta = 0
         self.drawValue(p, baseRect, self.m_value, delta)
         innerRect, innerRadius = self.calculateInnerRect(outerRadius)
         self.drawInnerBackground(p, innerRect)
@@ -241,6 +251,7 @@ class QRoundProgressBar(QWidget):
             textToDraw.replace('%p', str(round(procent, self.m_decimals)))
         if self.m_updateFlags == self.UpdateFlags.MAX:
             textToDraw.replace('%m', str(round(self.m_max - self.m_min + 1, self.m_decimals)))
+        print(value)
         return textToDraw
 
     def valueFormatChanged(self):
