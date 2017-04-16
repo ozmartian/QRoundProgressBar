@@ -245,13 +245,12 @@ class QRoundProgressBar(QWidget):
     def valueToText(self, value: float):
         textToDraw = self.m_format
         if self.m_updateFlags == self.UpdateFlags.VALUE:
-            textToDraw.replace('%v', str(round(value, self.m_decimals)))
+            textToDraw = textToDraw.replace('%v', str(round(value, self.m_decimals)))
         if self.m_updateFlags == self.UpdateFlags.PERCENT:
             procent = (value - self.m_min) / (self.m_max - self.m_min) * 100
-            textToDraw.replace('%p', str(round(procent, self.m_decimals)))
+            textToDraw = textToDraw.replace('%p', str(round(procent, self.m_decimals)))
         if self.m_updateFlags == self.UpdateFlags.MAX:
-            textToDraw.replace('%m', str(round(self.m_max - self.m_min + 1, self.m_decimals)))
-        print(value)
+            textToDraw = textToDraw.replace('%m', str(round(self.m_max - self.m_min + 1, self.m_decimals)))
         return textToDraw
 
     def valueFormatChanged(self):
