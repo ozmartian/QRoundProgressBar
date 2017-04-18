@@ -30,7 +30,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import QApplication, QWidget
 
-from QRoundProgressBar import QRoundProgressBar
+from qroundprogressbar import QRoundProgressBar
 from ui_TestWidget import Ui_TestWidget
 
 

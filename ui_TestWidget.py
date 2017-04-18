@@ -384,4 +384,4 @@ class Ui_TestWidget(object):
         self.label_3.setText(_translate("TestWidget", "Pie Style"))
         self.label_4.setText(_translate("TestWidget", "Donut Style"))
 
-from QRoundProgressBar import QRoundProgressBar
+from qroundprogressbar import QRoundProgressBar
