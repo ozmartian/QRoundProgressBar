@@ -17,7 +17,7 @@ sudo pip install .
 ```
 
 Now you can use the module:  
-*(e.g. copy/paste this snippet of into a demo.py file and run with 'python3 demo.py')*
+*(e.g. copy/paste this snippet of code into a demo.py file and run with 'python3 demo.py')*
 
 ```python
 #!/usr/bin/env python3
