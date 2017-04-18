@@ -24,15 +24,25 @@
 #
 #######################################################
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
-    name='QRoundProgressBar',
+    name='qroundprogressbar',
     version='1.0.0',
     packages=['.'],
     url='https://github.com/ozmartian/QRoundProgressBar',
     license='Apache License 2.0',
     author='Pete Alexandrou',
     author_email='pete@ozmartians.com',
-    description='PyQt5 port of C++ circular progress bar widget library'
+    description='PyQt5 port of C++ circular progress bar widget library',
+    keywords='qroundprogressbar PyQt PyQt5 QWidget widgets',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: X11 Applications :: Qt',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3 :: Only'
+    ]
 )
