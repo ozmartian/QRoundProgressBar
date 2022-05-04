@@ -59,7 +59,7 @@ class QRoundProgressBar(QWidget):
         self.m_decimals = 1
         self.m_updateFlags = self.UpdateFlags.PERCENT
         self.m_gradientData = None
-        self.text_visiability = True
+        self.text_visability = True
 
     # ENUMS ---------------------------------------------------------
 
@@ -82,8 +82,8 @@ class QRoundProgressBar(QWidget):
     def maximum(self):
         return self.m_max
 
-    def isTextVisiable(self):
-        return self.text_visiability
+    def isTextvisabile(self):
+        return self.text_visability
 
     # SETTERS -------------------------------------------------------
 
@@ -129,9 +129,9 @@ class QRoundProgressBar(QWidget):
             self.m_decimals = count
             self.valueFormatChanged()
 
-    def setTextVisiable(self, show: bool):
-        if show != self.text_visiability:
-            self.text_visiability = show
+    def setTextVisability(self, show: bool):
+        if show != self.text_visability:
+            self.text_visability = show
             self.update()
 
     # SLOTS ---------------------------------------------------------
@@ -187,7 +187,7 @@ class QRoundProgressBar(QWidget):
         self.drawValue(p, baseRect, self.m_value, delta)
         innerRect, innerRadius = self.calculateInnerRect(outerRadius)
         self.drawInnerBackground(p, innerRect)
-        self.conditionalDrawText(self.text_visiability, p, innerRect, innerRadius, self.m_value)
+        self.conditionalDrawText(self.text_visability, p, innerRect, innerRadius, self.m_value)
         p.end()
         painter = QPainter(self)
         painter.fillRect(baseRect, self.palette().window())
@@ -275,8 +275,8 @@ class QRoundProgressBar(QWidget):
         p.setPen(self.palette().text().color())
         p.drawText(textRect, Qt.AlignCenter, self.valueToText(value))
 
-    def conditionalDrawText(self, visiability, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
-        if visiability:
+    def conditionalDrawText(self, visability, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
+        if visability:
             self.drawText(p, innerRect, innerRadius, value)
 
     def valueToText(self, value: float):
