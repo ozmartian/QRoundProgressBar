@@ -82,6 +82,9 @@ class QRoundProgressBar(QWidget):
     def maximum(self):
         return self.m_max
 
+    def isTextVisiable(self):
+        return self.text_visiablity
+
     # SETTERS -------------------------------------------------------
 
     def setNullPosition(self, position: float):
@@ -125,6 +128,11 @@ class QRoundProgressBar(QWidget):
         if count >= 0 and count != self.m_decimals:
             self.m_decimals = count
             self.valueFormatChanged()
+
+    def setTextVisiable(self, show: bool):
+        if show != self.text_visiablity:
+            self.text_visiablity = show
+            self.update()
 
     # SLOTS ---------------------------------------------------------
 
@@ -179,7 +187,7 @@ class QRoundProgressBar(QWidget):
         self.drawValue(p, baseRect, self.m_value, delta)
         innerRect, innerRadius = self.calculateInnerRect(outerRadius)
         self.drawInnerBackground(p, innerRect)
-        self.setTextVisiablity(self.text_visiablity, p, innerRect, innerRadius, self.m_value)
+        self.conditionalDrawText(self.text_visiablity, p, innerRect, innerRadius, self.m_value)
         p.end()
         painter = QPainter(self)
         painter.fillRect(baseRect, self.palette().window())
@@ -196,7 +204,8 @@ class QRoundProgressBar(QWidget):
         elif self.m_barStyle == self.BarStyle.LINE:
             p.setPen(QPen(self.palette().base().color(), self.m_outlinePenWidth))
             p.setBrush(Qt.NoBrush)
-            p.drawEllipse(baseRect.adjusted(self.m_outlinePenWidth / 2, self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2))
+            p.drawEllipse(baseRect.adjusted(self.m_outlinePenWidth / 2, self.m_outlinePenWidth / 2,
+                                            -self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2))
         elif self.m_barStyle in (self.BarStyle.PIE, self.BarStyle.EXPAND):
             p.setPen(QPen(self.palette().base().color(), self.m_outlinePenWidth))
             p.setBrush(self.palette().base())
@@ -266,7 +275,7 @@ class QRoundProgressBar(QWidget):
         p.setPen(self.palette().text().color())
         p.drawText(textRect, Qt.AlignCenter, self.valueToText(value))
 
-    def setTextVisiablity(self, Visiablity, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
+    def conditionalDrawText(self, Visiablity, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
         if Visiablity:
             self.drawText(p, innerRect, innerRadius, value)
         else:
