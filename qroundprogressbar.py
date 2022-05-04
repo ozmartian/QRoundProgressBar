@@ -59,6 +59,7 @@ class QRoundProgressBar(QWidget):
         self.m_decimals = 1
         self.m_updateFlags = self.UpdateFlags.PERCENT
         self.m_gradientData = None
+        self.text_visiablity = True
 
     # ENUMS ---------------------------------------------------------
 
@@ -178,7 +179,7 @@ class QRoundProgressBar(QWidget):
         self.drawValue(p, baseRect, self.m_value, delta)
         innerRect, innerRadius = self.calculateInnerRect(outerRadius)
         self.drawInnerBackground(p, innerRect)
-        self.drawText(p, innerRect, innerRadius, self.m_value)
+        self.setTextVisiablity(self.text_visiablity, p, innerRect, innerRadius, self.m_value)
         p.end()
         painter = QPainter(self)
         painter.fillRect(baseRect, self.palette().window())
@@ -195,8 +196,7 @@ class QRoundProgressBar(QWidget):
         elif self.m_barStyle == self.BarStyle.LINE:
             p.setPen(QPen(self.palette().base().color(), self.m_outlinePenWidth))
             p.setBrush(Qt.NoBrush)
-            p.drawEllipse(baseRect.adjusted(self.m_outlinePenWidth / 2, self.m_outlinePenWidth / 2,
-                                            -self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2))
+            p.drawEllipse(baseRect.adjusted(self.m_outlinePenWidth / 2, self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2))
         elif self.m_barStyle in (self.BarStyle.PIE, self.BarStyle.EXPAND):
             p.setPen(QPen(self.palette().base().color(), self.m_outlinePenWidth))
             p.setBrush(self.palette().base())
@@ -265,6 +265,12 @@ class QRoundProgressBar(QWidget):
         textRect = QRectF(innerRect)
         p.setPen(self.palette().text().color())
         p.drawText(textRect, Qt.AlignCenter, self.valueToText(value))
+
+    def setTextVisiablity(self, Visiablity, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
+        if Visiablity:
+            self.drawText(p, innerRect, innerRadius, value)
+        else:
+            pass
 
     def valueToText(self, value: float):
         textToDraw = self.m_format
