@@ -59,7 +59,7 @@ class QRoundProgressBar(QWidget):
         self.m_decimals = 1
         self.m_updateFlags = self.UpdateFlags.PERCENT
         self.m_gradientData = None
-        self.text_visiablity = True
+        self.text_visiability = True
 
     # ENUMS ---------------------------------------------------------
 
@@ -83,7 +83,7 @@ class QRoundProgressBar(QWidget):
         return self.m_max
 
     def isTextVisiable(self):
-        return self.text_visiablity
+        return self.text_visiability
 
     # SETTERS -------------------------------------------------------
 
@@ -130,8 +130,8 @@ class QRoundProgressBar(QWidget):
             self.valueFormatChanged()
 
     def setTextVisiable(self, show: bool):
-        if show != self.text_visiablity:
-            self.text_visiablity = show
+        if show != self.text_visiability:
+            self.text_visiability = show
             self.update()
 
     # SLOTS ---------------------------------------------------------
@@ -187,7 +187,7 @@ class QRoundProgressBar(QWidget):
         self.drawValue(p, baseRect, self.m_value, delta)
         innerRect, innerRadius = self.calculateInnerRect(outerRadius)
         self.drawInnerBackground(p, innerRect)
-        self.conditionalDrawText(self.text_visiablity, p, innerRect, innerRadius, self.m_value)
+        self.conditionalDrawText(self.text_visiability, p, innerRect, innerRadius, self.m_value)
         p.end()
         painter = QPainter(self)
         painter.fillRect(baseRect, self.palette().window())
@@ -275,11 +275,9 @@ class QRoundProgressBar(QWidget):
         p.setPen(self.palette().text().color())
         p.drawText(textRect, Qt.AlignCenter, self.valueToText(value))
 
-    def conditionalDrawText(self, Visiablity, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
-        if Visiablity:
+    def conditionalDrawText(self, visiability, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
+        if visiability:
             self.drawText(p, innerRect, innerRadius, value)
-        else:
-            pass
 
     def valueToText(self, value: float):
         textToDraw = self.m_format
