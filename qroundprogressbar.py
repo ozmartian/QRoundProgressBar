@@ -3,7 +3,7 @@
 
 #######################################################
 #
-# Copyright 2017 Pete Alexandrou
+# Copyright 2024 Pete Alexandrou
 #
 # Ported to Python from the original works in C++ by:
 #
@@ -27,11 +27,11 @@
 import operator
 from enum import Enum
 
-from PyQt5.QtCore import pyqtSlot, QPointF, Qt, QRectF
-from PyQt5.QtGui import (QPalette, QConicalGradient, QGradient, QRadialGradient,
+from PyQt6.QtCore import pyqtSlot, QPointF, Qt, QRectF
+from PyQt6.QtGui import (QPalette, QConicalGradient, QGradient, QRadialGradient,
                          QFontMetricsF, QFont, QPainter, QPen, QPainterPath, QImage,
                          QPaintEvent)
-from PyQt5.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget
 
 
 class QRoundProgressBar(QWidget):
@@ -174,9 +174,9 @@ class QRoundProgressBar(QWidget):
     def paintEvent(self, event: QPaintEvent):
         outerRadius = min(self.width(), self.height())
         baseRect = QRectF(1, 1, outerRadius - 2, outerRadius - 2)
-        buffer = QImage(outerRadius, outerRadius, QImage.Format_ARGB32_Premultiplied)
+        buffer = QImage(outerRadius, outerRadius, QImage.Format.Format_ARGB32_Premultiplied)
         p = QPainter(buffer)
-        p.setRenderHint(QPainter.Antialiasing)
+        p.setRenderHint(QPainter.RenderHint.Antialiasing)
         self.rebuildDataBrushIfNeeded()
         self.drawBackground(p, buffer.rect())
         self.drawBase(p, baseRect)
@@ -203,7 +203,7 @@ class QRoundProgressBar(QWidget):
             p.drawEllipse(baseRect)
         elif self.m_barStyle == self.BarStyle.LINE:
             p.setPen(QPen(self.palette().base().color(), self.m_outlinePenWidth))
-            p.setBrush(Qt.NoBrush)
+            p.setBrush(Qt.BrushStyle.NoBrush)
             p.drawEllipse(baseRect.adjusted(self.m_outlinePenWidth / 2, self.m_outlinePenWidth / 2,
                                             -self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2))
         elif self.m_barStyle in (self.BarStyle.PIE, self.BarStyle.EXPAND):
@@ -222,7 +222,7 @@ class QRoundProgressBar(QWidget):
             return
         if self.m_barStyle == self.BarStyle.LINE:
             p.setPen(QPen(self.palette().highlight().color(), self.m_dataPenWidth))
-            p.setBrush(Qt.NoBrush)
+            p.setBrush(Qt.BrushStyle.NoBrush)
             if value == self.m_max:
                 p.drawEllipse(baseRect.adjusted(self.m_outlinePenWidth / 2, self.m_outlinePenWidth / 2,
                                                 -self.m_outlinePenWidth / 2, -self.m_outlinePenWidth / 2))
@@ -234,7 +234,7 @@ class QRoundProgressBar(QWidget):
                           int(-arcLength * 16))
             return
         dataPath = QPainterPath()
-        dataPath.setFillRule(Qt.WindingFill)
+        dataPath.setFillRule(Qt.FillRule.WindingFill)
         if value == self.m_max:
             dataPath.addEllipse(baseRect)
         else:
@@ -266,14 +266,14 @@ class QRoundProgressBar(QWidget):
         f = QFont(self.font())
         f.setPixelSize(10)
         fm = QFontMetricsF(f)
-        maxWidth = fm.width(self.valueToText(self.m_max))
+        maxWidth = fm.boundingRect(self.valueToText(self.m_max)).width()
         delta = innerRadius / maxWidth
         fontSize = f.pixelSize() * delta * 0.75
         f.setPixelSize(int(fontSize))
         p.setFont(f)
         textRect = QRectF(innerRect)
         p.setPen(self.palette().text().color())
-        p.drawText(textRect, Qt.AlignCenter, self.valueToText(value))
+        p.drawText(textRect, Qt.AlignmentFlag.AlignCenter, self.valueToText(value))
 
     def conditionalDrawText(self, visability, p: QPainter=None, innerRect: QRectF=None, innerRadius: float=None, value: float=None):
         if visability:
@@ -306,14 +306,14 @@ class QRoundProgressBar(QWidget):
         p = self.palette()
         if self.m_barStyle == self.BarStyle.EXPAND:
             dataBrush = QRadialGradient(0.5, 0.5, 0.5, 0.5, 0.5)
-            dataBrush.setCoordinateMode(QGradient.StretchToDeviceMode)
+            dataBrush.setCoordinateMode(QGradient.CoordinateMode.StretchToDeviceMode)
             for i in range(0, len(self.m_gradientData)):
                 dataBrush.setColorAt(self.m_gradientData[i][0], self.m_gradientData[i][1])
             p.setBrush(QPalette.Highlight, dataBrush)
         else:
             dataBrush = QConicalGradient(QPointF(0.5, 0.5), self.m_nullPosition)
-            dataBrush.setCoordinateMode(QGradient.StretchToDeviceMode)
+            dataBrush.setCoordinateMode(QGradient.CoordinateMode.StretchToDeviceMode)
             for i in range(0, len(self.m_gradientData)):
                 dataBrush.setColorAt(1 - self.m_gradientData[i][0], self.m_gradientData[i][1])
-            p.setBrush(QPalette.Highlight, dataBrush)
+            p.setBrush(QPalette.ColorRole.Highlight, dataBrush)
         self.setPalette(p)

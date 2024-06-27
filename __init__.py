@@ -3,7 +3,7 @@
 
 #######################################################
 #
-# Copyright 2017 Pete Alexandrou
+# Copyright 2024 Pete Alexandrou
 #
 # Ported to Python from the original works in C++ by:
 #

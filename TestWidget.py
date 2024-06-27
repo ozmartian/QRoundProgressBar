@@ -3,7 +3,7 @@
 
 #######################################################
 #
-# Copyright 2017 Pete Alexandrou
+# Copyright 2024 Pete Alexandrou
 #
 # Ported to Python from the original works in C++ by:
 #
@@ -26,9 +26,9 @@
 
 import sys
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QPalette
+from PyQt6.QtWidgets import QApplication, QWidget
 
 from qroundprogressbar import QRoundProgressBar
 from ui_TestWidget import Ui_TestWidget
@@ -52,19 +52,19 @@ class TestWidget(QWidget, Ui_TestWidget):
         self.connectToSlider(self.RoundBar3)
 
         p1 = QPalette()
-        p1.setBrush(QPalette.AlternateBase, Qt.black)
-        p1.setColor(QPalette.Text, Qt.yellow)
+        p1.setBrush(QPalette.ColorRole.AlternateBase, Qt.GlobalColor.black)
+        p1.setColor(QPalette.ColorRole.Text, Qt.GlobalColor.yellow)
         self.RoundBar4.setPalette(p1)
         self.RoundBar4.setNullPosition(QRoundProgressBar.PositionLeft)
         self.RoundBar4.setDecimals(0)
-        gradientPoints = [(0, Qt.green), (0.5, Qt.yellow), (1, Qt.red)]
+        gradientPoints = [(0, Qt.GlobalColor.green), (0.5, Qt.GlobalColor.yellow), (1, Qt.GlobalColor.red)]
         self.RoundBar4.setDataColors(gradientPoints)
         self.connectToSlider(self.RoundBar4)
 
         p2 = QPalette(p1)
-        p2.setBrush(QPalette.Base, Qt.lightGray)
-        p2.setColor(QPalette.Text, Qt.magenta)
-        p2.setColor(QPalette.Shadow, Qt.green)
+        p2.setBrush(QPalette.ColorRole.Base, Qt.GlobalColor.lightGray)
+        p2.setColor(QPalette.ColorRole.Text, Qt.GlobalColor.magenta)
+        p2.setColor(QPalette.ColorRole.Shadow, Qt.GlobalColor.green)
         self.RoundBar5.setPalette(p2)
         self.RoundBar5.setNullPosition(QRoundProgressBar.PositionRight)
         self.RoundBar5.setBarStyle(QRoundProgressBar.BarStyle.PIE)
@@ -89,4 +89,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     widget = TestWidget()
     widget.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

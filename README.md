@@ -1,4 +1,4 @@
-This is a port of QRoundProgressBar (https://sourceforge.net/projects/qroundprogressbar) to Python 3 PyQt5.
+This is a port of QRoundProgressBar (https://sourceforge.net/projects/qroundprogressbar) to Python 3 PyQt6.
 
 #### A Simple Example
 
@@ -26,9 +26,9 @@ Now you can use the module:
 import sys
 import time
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QBrush, QColor, QPalette
-from PyQt5.QtWidgets import QApplication, qApp
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QBrush, QColor, QPalette
+from PyQt6.QtWidgets import QApplication, qApp
 
 from qroundprogressbar import QRoundProgressBar
 
@@ -64,4 +64,4 @@ Run TestWidget.py to see a more detailed example of the module at work.
 ![Demo](https://a.fsdn.com/con/app/proj/qroundprogressbar/screenshots/RoundBars.png/1)
 
 I've also included the original C++ project's documentation in the docs folder which you should easily be
-able to follow and apply to PyQt5 as per usual.
+able to follow and apply to PyQt6 as per usual.

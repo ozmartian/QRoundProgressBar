@@ -3,7 +3,7 @@
 
 #######################################################
 #
-# Copyright 2017 Pete Alexandrou
+# Copyright 2024 Pete Alexandrou
 #
 # Ported to Python from the original works in C++ by:
 #
@@ -34,8 +34,8 @@ setup(
     license='Apache License 2.0',
     author='Pete Alexandrou',
     author_email='pete@ozmartians.com',
-    description='PyQt5 port of C++ circular progress bar widget library',
-    keywords='qroundprogressbar PyQt PyQt5 QWidget widgets',
+    description='PyQt6 port of C++ circular progress bar widget library',
+    keywords='qroundprogressbar PyQt PyQt6 QWidget widgets',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: X11 Applications :: Qt',
